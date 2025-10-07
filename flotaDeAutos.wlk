@@ -96,3 +96,105 @@ class AutoEspecial{
 }
 
 
+class Dependencia {
+    const property flota = #{}
+
+    var property empleados
+
+    method agregarAFlota(rodado){
+      flota.add(rodado)
+    } 
+
+    method quitarDeFlota(rodado){
+      flota.remove(rodado)
+    }
+
+    method pesoTotalFlota(){
+      flota.sum({unRodado => unRodado.peso()})
+    }
+
+    method estaBienEquipado(){
+      flota.size() >= 3  && flota.all({unRodado => unRodado.velocidadMaxima() >= 100 })
+    }
+
+    method capacidadTotalEnColor(color){
+      flota.filter({unRodado => unRodado.color() == color}).sum({unRodado => unRodado.capacidad()})
+    }
+
+    method colorDelRodadoMasRapido() = self.rodadoMasRapido()     //self autoreferencia
+    //aux
+    method rodadoMasRapido() = flota.max({unRodado => unRodado.velocidadMaxima()})
+
+    method capacidadFaltante() =  empleados - capacidadTotal()
+  
+    method capacidadTotal(){
+      flota.sum({})
+    }
+
+    method esGrande(){
+      empleados >= 40 && flota.size() >= 5
+    }
+
+    
+    method totalPasajeros(){
+      pedidos.sum({unPedido => unPedido.})
+    }
+
+    method cualesPedidosNoSatisfechos(){
+      pedidos.filter({unPedido => unPedido.satisfaceElPedido(****)})
+    }
+
+    method todosLosPedidosIncompatiblesConUnColor(color){
+      pedidos.all({unPedido => unPedido.esColorIncompatible(color)})
+    }
+
+    method relajarATodos(){
+      pedidos.forEach({unPedido=> unPedido.relajar()})
+    }
+
+
+}   
+
+//ETAPA 2
+
+
+
+class Pedido {
+  const property distancia
+  var  tiempoMaximo
+  const property cantidadPasajeros
+  const property coloresIncompatibles    
+
+ method tiempoMaximo() = tiempoMaximo
+  method velocidadRequerida() = distancia / tiempoMaximo
+
+  method satisfaceElPedido(auto){
+      auto.velocidadMaxima() >= self.velocidadRequerida() + 10 &&
+      auto.capacidad() >= cantidadPasajeros &&
+      !coloresIncompatibles.contains(auto.color())
+  }
+
+  method acelerar(){
+    tiempoMaximo -= 1
+  } 
+
+  method relajar(){
+    tiempoMaximo += 1
+  } 
+
+  const property pedidos = #{} 
+
+    method agregarPedido(){
+      pedidos.add(pedido)
+    }
+
+    method quitarPedido(){
+      pedidos.remove(pedido)
+    }
+
+    method esColorIncompatible(color){
+      coloresIncompatibles.contains(color)
+    }
+
+
+}

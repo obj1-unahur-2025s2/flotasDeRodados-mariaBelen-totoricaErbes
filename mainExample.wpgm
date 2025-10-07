@@ -1,7 +1,7 @@
 import wollok.game.*
 
-import example.pepita
-
+import flotaDeAutos.*
+/*
 program PepitaGame {
 	game.title("Pepita")
 	game.height(10)
@@ -16,3 +16,4 @@ program PepitaGame {
 
 	game.start()
 }
+*/
