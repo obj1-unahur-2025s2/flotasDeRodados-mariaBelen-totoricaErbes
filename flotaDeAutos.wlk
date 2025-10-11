@@ -22,14 +22,47 @@ pueden tener distintos valores --> si --> ATRIBUTO
 
 */
 
-class ChevroletCorsa{
-   const property color 
+class Corsa{
+   //var image
+   const property image
+   //const property color 
+   var position = new Position(x=4,y=7) //game.at(4,7) lo mismo
+
+   method position(nuevaPosicion)  {position = nuevaPosicion}
+   method position() = position
+   const  posiciones = #{position}   // [] //new List()
+
+   method posiciones() = posiciones
 
    method capacidad() = 4                         // {return 4}
    method velocidadMaxima() = 150                 //{return 150}
    method peso() = 1300
 
+  method pasoPor(posicion){
+    return posiciones.contains(posicion)
+  }
+
+  method moverseHacia(direccion){
+    if(direccion == norte.direcc()){self.position(self.position().up(1)) self.agregar(self.position())}
+    else if(direccion == sur.direcc()){self.position(self.position().down(1)) self.agregar(self.position())}
+    else if(direccion == oeste.direcc()){self.position(self.position().left(1)) self.agregar(self.position())}
+    else {self.position(self.position().right(1)) self.agregar(self.position())}
+  }
+
+  method agregar(unaPosicion){
+    position.add(unaPosicion)
+  }
+
 }
+
+object norte{method direcc() = self}
+
+object sur{method direcc() = self}
+
+object oeste{method direcc() = self}
+
+object este{method direcc() = self}
+
 
 class RenaultKwid{
     var tieneTanqueDeGas 
@@ -182,14 +215,14 @@ class Pedido {
     tiempoMaximo += 1
   } 
 
-  const property pedidos = #{} 
+  const property pedido = #{} 
 
     method agregarPedido(){
-      pedidos.add(pedido)
+      pedido.add(pedido)
     }
 
     method quitarPedido(){
-      pedidos.remove(pedido)
+      pedido.remove(pedido)
     }
 
     method esColorIncompatible(color){
@@ -197,4 +230,28 @@ class Pedido {
     }
 
 
+}
+
+
+
+object pared {
+
+  var property image = "paredLadrillos3.png"
+  var property position = new Position (x=8,y=3)
+  var resistencia = 3
+
+  method choque(){
+    resistencia = 0.max(resistencia - 1)
+    if(resistencia == 2){
+      image = "paredLadrillos2.png"
+    }
+    else{
+      image = "paredLadrillos1.png"
+    }
+
+  } 
+
+  method resistencia(){
+   return resistencia
+  }
 }

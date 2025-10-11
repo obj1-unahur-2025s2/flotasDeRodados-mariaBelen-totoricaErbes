@@ -1,5 +1,6 @@
+
 import flotaDeAutos.*
-/*
+
 describe "group of tests for pepita" {
 
   test "pepita has initial energy" {
@@ -7,4 +8,3 @@ describe "group of tests for pepita" {
   }
 
 }
-*/
